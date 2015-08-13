@@ -1,0 +1,17 @@
+{
+  "name": "woocoomerce-variations-with-radio-button",
+  "description": "Changes the Woocoomerce Variations to use Radio Buttons instead of Select/Options",
+  "version": "0.1.0",
+  "devDependencies": {
+    "amdclean": "^2.7.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.3",
+    "matchdep": "~0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/essenmitsosse/woocoomerce-variations-with-radio-button"
+  }
+}
