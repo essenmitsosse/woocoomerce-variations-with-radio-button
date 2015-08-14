@@ -1,7 +1,7 @@
 // Based on the original add-to-cart-variations.js from Woocommerce 
 // plugins/woocommerce/assets/js/frontend/add-to-cart-variations.js
 
-define( [ 'woocommerce/add-to-cart-variations/get-all-combinations' ], function ( getAllCombinations ) {
+define( [ './add-to-cart-variations-with-radio/get-all-combinations' ], function ( getAllCombinations ) {
 'use strict';
 $.fn.betoniuWcVariationForm = function () {
 	var $form = this,
@@ -41,7 +41,7 @@ $.fn.betoniuWcVariationForm = function () {
 	initCheckSingleWrapper = function ( index, wrapper ) {
 		var $wrapper = $( wrapper ),
 		$input = $wrapper.find( 'input' ),
-		$tooltip = $( '<span/>', {
+		$tooltip = $( '<p/>', {
 			'class': 'tooltip',
 			'disabled': 'disabled'
 		} ),
@@ -267,8 +267,6 @@ $.fn.betoniuWcVariationForm = function () {
 					$single_variation.html( variation.price_html + variation.availability_html );
 				}
 
-				console.log( variation );
-
 				$single_variation_wrap.show().trigger( 'show_variation', [ variation ] );
 
 			};
@@ -339,18 +337,18 @@ $.fn.betoniuWcVariationForm = function () {
 
 	$form.trigger( 'betoniuWcVariationForm' );
 
-	$( 'body' ).data( 'foo', 'bar' );
-
 	return $form;
 };
 
 $( function() {
-	// // wc_add_to_cart_variation_params is required to continue, ensure the object exists
-	// if ( typeof wc_add_to_cart_variation_params === 'undefined' )
-	// 	return false;
+	var $variationForms = $( '.variations_form' );
 
-	$( '.variations_form' ).betoniuWcVariationForm();
-	$( '.variations_form .variations fieldset:first-child' ).change();
+	if ( $variationForms.length > 0 ) {
+		$variationForms.betoniuWcVariationForm();
+		$variationForms.find( 'fieldset:first-child' ).change();
+	}
+	
+	
 });
 
 } );

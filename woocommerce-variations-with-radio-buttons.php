@@ -29,10 +29,9 @@ class Woocommerce_Variations_With_Radio_Buttons {
     static private $instance = NULL;
 
 	public function __construct() {
-		add_filter( 'woocommerce_locate_template', array( 'Woocommerce_Variations_With_Radio_Buttons', 'add_woocommerce_templates' ), 10, 3 );
-		
-		// handles the variation selection of products, is replaced by add-to-cart-variation-with-radio
-		wp_deregister_script( 'wc-add-to-cart-variation' );
+		add_filter( 'woocommerce_locate_template', 			array( 'Woocommerce_Variations_With_Radio_Buttons', 'add_woocommerce_templates' ), 10, 3 );
+		add_filter( 'woocommerce_ajax_variation_threshold', array( 'Woocommerce_Variations_With_Radio_Buttons', 'infinite_wc_ajax_variation_threshold' ), 10, 2 );
+		add_action( 'wp_enqueue_scripts', 					array( 'Woocommerce_Variations_With_Radio_Buttons', 'add_scripts' ), 20 );
 	}
 
 	/**
@@ -65,8 +64,22 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		return $template;
 	}
 
-	public static function wc_radio_variation_attribute_options () {
+	public static function add_scripts() {
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
+		// handles the variation selection of products, is replaced by add-to-cart-variation-with-radio
+		wp_deregister_script( 'wc-add-to-cart-variation' );
+
+		if ( function_exists( 'is_woocommerce' ) ) {
+			if ( is_woocommerce() && is_product() ) {
+				// Add the plugin script
+				wp_enqueue_script( 'woocommerce-variations-with-radio-buttons-frontend', plugins_url( '/assets/js/main' . $suffix . '.js', plugin_basename( __FILE__ ) ), array( 'jquery', 'woocommerce' ), '0.0.1', true );
+			}
+		}
+	}
+
+	public static function infinite_wc_ajax_variation_threshold( $qty, $product ) {
+		return 1000;
 	}
 
 } // end class

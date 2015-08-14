@@ -1,6 +1,6 @@
 ;(function( window, $body, $ ) {
-var woocommerce_add_to_cart_variations_get_all_combinations, woocommerce_add_to_cart_variations;
-woocommerce_add_to_cart_variations_get_all_combinations = function () {
+var woocommerce_add_to_cart_variations_with_radio_get_all_combinations, woocommerce_add_to_cart_variations_with_radio;
+woocommerce_add_to_cart_variations_with_radio_get_all_combinations = function () {
   var available_combinations, order, figureOutWhyOptionIsUnavailable = function () {
       var loopThroughAttribute = function (info, currentStep, currentTree) {
           // console.log( "in the loop. loopedAttr: ", info.loopedAttr.attrName, "tree: ", currentTree );
@@ -127,7 +127,7 @@ woocommerce_add_to_cart_variations_get_all_combinations = function () {
     };
   };
 }();
-woocommerce_add_to_cart_variations = function (getAllCombinations) {
+woocommerce_add_to_cart_variations_with_radio = function (getAllCombinations) {
   'use strict';
   $.fn.betoniuWcVariationForm = function () {
     var $form = this, $fieldsets = this.find('fieldset'), $inputWrappers = this.find('.product_variable_option'), $formVariationId = this.find('input.variation_id'), $product = $(this).closest('.product'), $imageDiv = $product.find('.images'), $product_img = $imageDiv.find('img:eq(0)'), o_src = $product_img.attr('src'), o_title = $product_img.attr('title'), o_alt = $product_img.attr('alt'), attributes = {}, values = {}, allVariations = $form.data('product_variations') || window.product_variations || window['product_variations_' + parseInt($form.data('product_id'))], initCheckSingleFieldset = function (index, wrapper) {
@@ -137,7 +137,7 @@ woocommerce_add_to_cart_variations = function (getAllCombinations) {
         linkedData.values = {};
         attributes[attrName] = linkedData;
       }, initCheckSingleWrapper = function (index, wrapper) {
-        var $wrapper = $(wrapper), $input = $wrapper.find('input'), $tooltip = $('<span/>', {
+        var $wrapper = $(wrapper), $input = $wrapper.find('input'), $tooltip = $('<p/>', {
             'class': 'tooltip',
             'disabled': 'disabled'
           }), linkedData = {}, val = $input.attr('value'), attrName = $input.attr('name'), attr = attributes[attrName];
@@ -261,7 +261,6 @@ woocommerce_add_to_cart_variations = function (getAllCombinations) {
           } else {
             $single_variation.html(variation.price_html + variation.availability_html);
           }
-          console.log(variation);
           $single_variation_wrap.show().trigger('show_variation', [variation]);
         };
       }();
@@ -308,15 +307,14 @@ woocommerce_add_to_cart_variations = function (getAllCombinations) {
     // Show single variation details (price, stock, image)
     this.on('found_variation', found_variation);
     $form.trigger('betoniuWcVariationForm');
-    $('body').data('foo', 'bar');
     return $form;
   };
   $(function () {
-    // // wc_add_to_cart_variation_params is required to continue, ensure the object exists
-    // if ( typeof wc_add_to_cart_variation_params === 'undefined' )
-    // 	return false;
-    $('.variations_form').betoniuWcVariationForm();
-    $('.variations_form .variations fieldset:first-child').change();
+    var $variationForms = $('.variations_form');
+    if ($variationForms.length > 0) {
+      $variationForms.betoniuWcVariationForm();
+      $variationForms.find('fieldset:first-child').change();
+    }
   });
-}(woocommerce_add_to_cart_variations_get_all_combinations);
+}(woocommerce_add_to_cart_variations_with_radio_get_all_combinations);
 }( jQuery( window ), jQuery( "body" ), jQuery ));

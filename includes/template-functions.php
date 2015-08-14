@@ -47,9 +47,9 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 		$options    = $attributes[ $attribute ];
 	}
 	
-	echo '<fieldset id=\'' . esc_attr( $id ) . '\' class=\'' . esc_attr( $class ) . '\' name=\'' . esc_attr( $name ) . '\' data-attribute_name=\'' . esc_attr( sanitize_title( $attribute ) ) . '\'>';
+	echo '<fieldset id=\'' . esc_attr( $id ) . '\' class=\'' . esc_attr( $class ) . '\' name=\'' . esc_attr( $name ) . '\' data-attribute_name=\'' . esc_attr( $name ) . '\'>';
 	echo '<legend>' . wc_attribute_label( $attribute ) . '</legend>';
-	echo '<ul class=\'product_variable_list\'>';
+	echo '<div class=\'product_variable_list\'>';
 
 	if ( ! empty( $options ) ) {
 		if ( $product && taxonomy_exists( $attribute ) ) {
@@ -94,6 +94,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 		}
 	}
 
+	echo '</div>';
 	echo '</fieldset>';
 }
 
@@ -111,7 +112,7 @@ function wc_radio_select_button_for_add_to_cart( $value, $checked, $content, $na
 	$id = 'product_value_' . $name . '_' . $value;
 
 
-	echo "<li class='product_variable_option'>".
+	echo "<div class='product_variable_option'>".
 	"\t<input " . 
 		"type='radio' " .
 		"name='attribute_" . $name . "' " .
@@ -122,7 +123,7 @@ function wc_radio_select_button_for_add_to_cart( $value, $checked, $content, $na
 		"data-description='" . $description . "' " .
 	"/>" .
 	"\t<label for='" . $id . "'>" . $content . "</label>" .
-	"</li>";
+	"</div>";
 	// echo '<option value="' . esc_attr( $value ) . '" ' . selected( sanitize_title( $selected_valueString ), sanitize_title( $value ), false ) . '>' . $content . '</option>';
 
 }

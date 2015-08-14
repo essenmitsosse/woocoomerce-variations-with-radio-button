@@ -25,7 +25,6 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 		<div class="variations">
 			<?php foreach ( $attributes as $attribute_name => $options ) : ?>
-				
 
 					<?php
 						$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) : $product->get_variation_default_attribute( $attribute_name );
