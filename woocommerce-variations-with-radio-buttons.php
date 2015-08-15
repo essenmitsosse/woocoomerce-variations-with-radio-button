@@ -3,11 +3,11 @@
  * Plugin Name:     WooCommerce Variations with Radio Buttons
  * Description:     Changes the Woocoomerce Variations to use Radio Buttons instead of Select/Options
  * Author:          essenmitsosse
- * Version:         0.0.1
+ * Version:         1.0.0
  * Author URI:      http://essenmitsosse.de
  * Text Domain:     woocommerce-variations-with-radio-buttons
  * Upgrade Check:   none
- * Last Change:     13.08.2015 09:01
+ * Last Change:     15.08.2015 14:00
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,7 +20,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
      * Plugin version
      * @var string
      */
-    static public $version = "0.0.1";
+    static public $version = "1.0.0";
 
 	/**
      * Singleton object holder
@@ -38,7 +38,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 	* Creates an Instance of this Class
 	*
 	* @access public
-	* @since 0.0.1
+	* @since 1.0.0
 	* @return Woocommerce_Variations_With_Radio_Buttons
 	*/
 	public static function get_instance() {
@@ -73,7 +73,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		if ( function_exists( 'is_woocommerce' ) ) {
 			if ( is_woocommerce() && is_product() ) {
 				// Add the plugin script
-				wp_enqueue_script( 'woocommerce-variations-with-radio-buttons-frontend', plugins_url( '/assets/js/main' . $suffix . '.js', plugin_basename( __FILE__ ) ), array( 'jquery', 'woocommerce' ), '0.0.1', true );
+				wp_enqueue_script( 'woocommerce-variations-with-radio-buttons-frontend', plugins_url( '/assets/js/main' . $suffix . '.js', plugin_basename( __FILE__ ) ), array( 'jquery', 'woocommerce' ), '1.0.0', true );
 			}
 		}
 	}
