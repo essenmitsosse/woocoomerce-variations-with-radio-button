@@ -49,7 +49,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 	
 	echo '<fieldset id=\'' . esc_attr( $id ) . '\' class=\'' . esc_attr( $class ) . '\' name=\'' . esc_attr( $name ) . '\' data-attribute_name=\'' . esc_attr( $name ) . '\'>';
 	echo '<legend>' . wc_attribute_label( $attribute ) . '</legend>';
-	do_action( "before_variations_with_radio_buttons_list" );
+	do_action( "before_variations_with_radio_buttons_list", $args );
 	echo '<div class=\'product_variable_list\'>';
 
 	if ( ! empty( $options ) ) {
