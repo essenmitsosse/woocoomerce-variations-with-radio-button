@@ -49,6 +49,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 	
 	echo '<fieldset id=\'' . esc_attr( $id ) . '\' class=\'' . esc_attr( $class ) . '\' name=\'' . esc_attr( $name ) . '\' data-attribute_name=\'' . esc_attr( $name ) . '\'>';
 	echo '<legend>' . wc_attribute_label( $attribute ) . '</legend>';
+	do_action( "before_variations_with_radio_buttons_list" );
 	echo '<div class=\'product_variable_list\'>';
 
 	if ( ! empty( $options ) ) {
@@ -62,13 +63,13 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 						checked( sanitize_title( $selectedValue ), $term->slug, false )
 						: checked( $first, true, false );
 
-					wc_radio_select_button_for_add_to_cart( 
-						esc_attr( $term->slug ), 
-						$checkedString, 
-						apply_filters( 'woocommerce_variation_option_name', $term->name ),
-						sanitize_title( $attribute ),
-						$term->description
-					);
+					wc_radio_select_button_for_add_to_cart( array(
+						"value"       => esc_attr( $term->slug ), 
+						"checked"     => $checkedString, 
+						"content"     => apply_filters( 'woocommerce_variation_option_name', $term->name ),
+						"name"        => sanitize_title( $attribute ),
+						"description" => $term->description
+					) );
 
 					$first = false;
 				}				
@@ -82,12 +83,12 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 						: checked( $selectedValue, $option, false )
 					: checked( $first, true, false );
 
-				wc_radio_select_button_for_add_to_cart( 
-					esc_attr( $option ), 
-					$checkedString, 
-					esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ),
-					sanitize_title( $attribute )
-				);
+				wc_radio_select_button_for_add_to_cart( array(
+					"value"       => esc_attr( $option ), 
+					"checked"     => $checkedString, 
+					"content"     => esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ),
+					"name"        => sanitize_title( $attribute )
+				) );
 
 				$first = true;
 			}
@@ -101,16 +102,17 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 /**
  * Shows a single selection as a radio button with a label
  *
- * @param string $value
- * @param string $checked
- * @param string $content
- * @param string $name
- * @param string $description
+ * @param string $args
  * @since 0.0.1
  */
-function wc_radio_select_button_for_add_to_cart( $value, $checked, $content, $name, $description = '' ) {
-	$id = 'product_value_' . $name . '_' . $value;
+function wc_radio_select_button_for_add_to_cart( $args ) {
+	$value = $args[ "value" ];
+	$checked = $args[ "checked" ];
+	$content = $args[ "content" ];
+	$name = $args[ "name" ];
+	$description = array_key_exists( 'description', $args ) ? $args[ "description" ] : false;
 
+	$id = 'product_value_' . $name . '_' . $value;
 
 	echo "<div class='product_variable_option'>".
 	"\t<input " . 
@@ -120,7 +122,7 @@ function wc_radio_select_button_for_add_to_cart( $value, $checked, $content, $na
 		$checked .
 		"value='" . $value . "' " .
 		"data-nicename='" . $content . "' " .
-		"data-description='" . $description . "' " .
+		( $description === false ? '' : "data-description='" . $description . "' " ) .
 	"/>" .
 	"\t<label for='" . $id . "'>" . $content . "</label>" .
 	"</div>";
