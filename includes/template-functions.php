@@ -96,6 +96,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 	}
 
 	echo '</div>';
+	do_action( "after_variations_with_radio_buttons_list", $args );
 	echo '</fieldset>';
 }
 
