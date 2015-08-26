@@ -148,6 +148,7 @@ woocommerce_add_to_cart_variations_with_radio = function (getAllCombinations) {
         linkedData.attrName = attrName;
         linkedData.val = val;
         linkedData.description = $input.data('description');
+        console.log(123, linkedData.description);
         linkedData.niceName = $input.data('nicename');
         wrapper.linkedData = attr.values[val] = values[val] = linkedData;
         $tooltip.appendTo($wrapper);

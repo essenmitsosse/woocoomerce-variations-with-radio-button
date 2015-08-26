@@ -111,7 +111,11 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 	$checked = $args[ "checked" ];
 	$content = $args[ "content" ];
 	$name = $args[ "name" ];
-	$description = array_key_exists( 'description', $args ) ? $args[ "description" ] : false;
+	$description = array_key_exists( 'description', $args ) ? 
+		$args[ "description" ] !== "" ?
+			$args[ "description" ]
+			: false
+		: false;
 
 	$id = 'product_value_' . $name . '_' . $value;
 
