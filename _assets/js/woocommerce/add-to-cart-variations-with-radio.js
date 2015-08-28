@@ -175,8 +175,7 @@ $.fn.betoniuWcVariationForm = function () {
 		} )(),
 
 		changeImage = function ( variation ) {
-			var variation_image = variation.image_src,
-				variation_link  = variation.image_link,
+			var variation_image = variation.image_link,
 				variation_title = variation.image_title,
 				variation_alt = variation.image_alt;
 
