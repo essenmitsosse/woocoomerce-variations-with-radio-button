@@ -218,17 +218,17 @@ $.fn.betoniuWcVariationForm = function () {
 
 				changeImage( variation );
 
-				$sku.text( variation.sku ?
+				$sku.html( variation.sku ?
 					variation.sku
 					: $sku.attr( 'data-o_sku' ) 
 				);
 
-				$weight.text( variation.weight ?
+				$weight.html( variation.weight ?
 					variation.weight
 					: $weight.attr( 'data-o_weight' ) 
 				);
 				
-				$dimensions.text( variation.dimensions ?
+				$dimensions.html( variation.dimensions ?
 					variation.dimensions
 					: $dimensions.attr( 'data-o_dimensions' ) 
 				);
