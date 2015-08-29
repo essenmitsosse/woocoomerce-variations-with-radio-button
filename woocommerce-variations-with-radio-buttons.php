@@ -32,6 +32,8 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		add_filter( 'woocommerce_locate_template', 			array( 'Woocommerce_Variations_With_Radio_Buttons', 'add_woocommerce_templates' ), 10, 3 );
 		add_filter( 'woocommerce_ajax_variation_threshold', array( 'Woocommerce_Variations_With_Radio_Buttons', 'infinite_wc_ajax_variation_threshold' ), 10, 2 );
 		add_action( 'wp_enqueue_scripts', 					array( 'Woocommerce_Variations_With_Radio_Buttons', 'add_scripts' ), 20 );
+		
+		// Shows price, even min and max price are the same (by default price wouldn’t be added to the product variation info)
 		add_filter( 'woocommerce_show_variation_price',     array( 'Woocommerce_Variations_With_Radio_Buttons', 'always_show_price' ), 100 );
 	}
 
