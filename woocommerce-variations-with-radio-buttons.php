@@ -97,12 +97,16 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		
 
 		if ( $product->product_type == "variable" ) {
-
+			// move add to cart above the price for variable product
 			remove_action( "woocommerce_single_product_summary", "woocommerce_template_single_add_to_cart" , 30 );
 			add_action( "woocommerce_single_product_summary", "woocommerce_template_single_add_to_cart" , 5 );
 
 			// add no Javascript notice;
 			add_action( "wgm_before_single_price_html", array( "Woocommerce_Variations_With_Radio_Buttons", "show_product_price_is_loading_via_javascript" ), 50 );
+
+			// for variable product move shipping time notice below the price
+			remove_action( "woocommerce_single_product_summary", array( "WGM_Template", "add_template_loop_shop" ), 11 );
+			add_action( "woocommerce_single_variation", array( "WGM_Template", "add_template_loop_shop" ), 16 );
 		}
 	}
 
