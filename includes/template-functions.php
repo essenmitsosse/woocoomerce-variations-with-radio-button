@@ -66,7 +66,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 					wc_radio_select_button_for_add_to_cart( array(
 						"value"       => esc_attr( $term->slug ), 
 						"checked"     => $checkedString, 
-						"content"     => apply_filters( 'woocommerce_variation_option_name', $term->name ),
+						"content"     => $term->name,
 						"name"        => sanitize_title( $attribute ),
 						"description" => $term->description
 					) );
@@ -86,7 +86,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 				wc_radio_select_button_for_add_to_cart( array(
 					"value"       => esc_attr( $option ), 
 					"checked"     => $checkedString, 
-					"content"     => esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ),
+					"content"     => esc_html( $option ),
 					"name"        => sanitize_title( $attribute )
 				) );
 
@@ -119,8 +119,8 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 
 	$id = 'product_value_' . $name . '_' . $value;
 
-	echo "<div class='product_variable_option'>".
-	"\t<input " . 
+	echo "\n<div class='product_variable_option'>".
+	"\n\t<input " . 
 		"type='radio' " .
 		"name='attribute_" . $name . "' " .
 		"id='" . $id . "' " .
@@ -129,8 +129,8 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 		"data-nicename='" . $content . "' " .
 		( $description === false ? '' : "data-description='" . $description . "' " ) .
 	"/>" .
-	"\t<label for='" . $id . "'>" . $content . "</label>" .
-	"</div>";
+	"\n\t<label for='" . $id . "'>" . apply_filters( "woocommerce_variation_option_name", $content ) . "</label>" .
+	"\n</div>";
 	// echo '<option value="' . esc_attr( $value ) . '" ' . selected( sanitize_title( $selected_valueString ), sanitize_title( $value ), false ) . '>' . $content . '</option>';
 
 }
