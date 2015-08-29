@@ -129,7 +129,7 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 		"data-nicename='" . $content . "' " .
 		( $description === false ? '' : "data-description='" . $description . "' " ) .
 	"/>" .
-	"\t<label for='" . $id . "'>" . $content . "</label>" .
+	"\t<label for='" . $id . "'>" . apply_filter( "woocommerce_variation_option_name", $content ) . "</label>" .
 	"</div>";
 	// echo '<option value="' . esc_attr( $value ) . '" ' . selected( sanitize_title( $selected_valueString ), sanitize_title( $value ), false ) . '>' . $content . '</option>';
 
