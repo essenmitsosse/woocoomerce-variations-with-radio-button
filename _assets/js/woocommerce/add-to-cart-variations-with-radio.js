@@ -193,14 +193,20 @@ $.fn.betoniuWcVariationForm = function () {
 		},
 
 		found_variation = ( function () {
-			var $variationButton = $form.find( '.variations_button' ),
-				$single_variation = $form.find( '.single_variation' ),
+			var $variationButton =       $form.find( '.variations_button' ),
+				$single_variation =      $form.find( '.single_variation' ),
+				$availability =          $( '<div/>', {
+												'class': 'availability'
+											} ),
 				$single_variation_wrap = $form.find( '.single_variation_wrap' ),
-				$sku = $product.find( '.product_meta' ).find( '.sku' ),
-				$weight = $product.find( '.product_weight' ),
-				$dimensions = $product.find( '.product_dimensions' ),
-				$quantity = $single_variation_wrap.find( '.quantity' ),
-				$inputQuantity = $quantity.find( 'input.qty' );
+				$sku =                   $product.find( '.product_meta' ).find( '.sku' ),
+				$weight =                $product.find( '.product_weight' ),
+				$dimensions =            $product.find( '.product_dimensions' ),
+				$quantity =              $single_variation_wrap.find( '.quantity' ),
+				$inputQuantity =         $quantity.find( 'input.qty' );
+
+			// add availabilty div
+			$variationButton.after( $availability );
 
 			if ( ! $sku.attr( 'data-o_sku' ) ) {
 				$sku.attr( 'data-o_sku', $sku.text() );
@@ -263,7 +269,8 @@ $.fn.betoniuWcVariationForm = function () {
 				if ( ! variation.variation_is_visible ) {
 					$single_variation.html( '<p>Diese Variante ist leider nicht verfügbar.</p>' );
 				} else {
-					$single_variation.html( variation.price_html + variation.availability_html );
+					$single_variation.html( variation.price_html );
+					$availability.html( variation.availability_html );
 				}
 
 				$single_variation_wrap.show().trigger( 'show_variation', [ variation ] );
