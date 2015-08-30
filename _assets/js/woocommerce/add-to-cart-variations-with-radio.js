@@ -267,7 +267,7 @@ $.fn.betoniuWcVariationForm = function () {
 
 				// Hide if variation is not available
 				if ( ! variation.variation_is_visible ) {
-					$single_variation.html( '<p>Diese Variante ist leider nicht verfügbar.</p>' );
+					$availability.html( '<p>Diese Variante ist leider nicht verfügbar.</p>' );
 				} else {
 					$single_variation.html( variation.price_html );
 					$availability.html( variation.availability_html );
