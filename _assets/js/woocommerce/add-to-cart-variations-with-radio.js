@@ -352,6 +352,7 @@ $( function() {
 	if ( $variationForms.length > 0 ) {
 		$variationForms.betoniuWcVariationForm();
 		$variationForms.find( 'fieldset:first-child' ).change();
+		$body.trigger( 'content-update' );
 	}
 	
 	
