@@ -41,7 +41,7 @@ $.fn.betoniuWcVariationForm = function () {
 	initCheckSingleWrapper = function ( index, wrapper ) {
 		var $wrapper = $( wrapper ),
 		$input = $wrapper.find( 'input' ),
-		$tooltip = $( '<p/>', {
+		$tooltip = $( '<div/>', {
 			'class': 'tooltip',
 			'disabled': 'disabled'
 		} ),
@@ -163,12 +163,18 @@ $.fn.betoniuWcVariationForm = function () {
 
 					$tooltip.attr( 'disabled', false );
 					$tooltip.html( 
+						'<p>' + 
 						'Nicht verfügbar für: ' +
 						checkCombinations.figureOutWhyOptionIsUnavailable( 
 							data,
 							selectedValues
-							).join( ', ' )
-						);
+							).join( ', ' ) +
+						'</p>' +
+						( description ? 
+							'<p>' + description + '</p>'
+							: ''
+						)
+					);
 				}
 			} );
 			};
