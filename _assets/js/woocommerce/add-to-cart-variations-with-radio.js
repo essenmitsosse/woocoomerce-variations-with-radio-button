@@ -331,7 +331,7 @@ $.fn.betoniuWcVariationForm = function () {
 	$inputWrappers.each( initCheckSingleWrapper );
 
 	// remove existing price with range
-	$( '.price' ).remove();
+	$( '.price' ).first().remove();
 
 	// Bind events
 
