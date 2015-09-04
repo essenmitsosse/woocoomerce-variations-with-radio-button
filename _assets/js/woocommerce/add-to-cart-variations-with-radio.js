@@ -40,15 +40,17 @@ $.fn.betoniuWcVariationForm = function () {
 
 	initCheckSingleWrapper = function ( index, wrapper ) {
 		var $wrapper = $( wrapper ),
-		$input = $wrapper.find( 'input' ),
-		$tooltip = $( '<div/>', {
-			'class': 'tooltip',
-			'disabled': 'disabled'
-		} ),
-		linkedData = {},
-		val = $input.attr( 'value' ),
-		attrName = $input.attr( 'name' ),
-		attr = attributes[ attrName ];
+			$input = $wrapper.find( "input" ),
+			$label = $wrapper.find( "label" ),
+			$tooltip = $( '<div/>', {
+				'class': 'tooltip',
+				'disabled': 'disabled'
+			} ),
+			linkedData = {},
+			val = $input.attr( 'value' ),
+			attrName = $input.attr( 'name' ),
+			attr = attributes[ attrName ],
+			isScrolling = false;
 
 		linkedData.$self = $wrapper;
 		linkedData.$input = $input;
@@ -59,8 +61,24 @@ $.fn.betoniuWcVariationForm = function () {
 		linkedData.description = $input.data( 'description' );
 		linkedData.niceName = $input.data( 'nicename' );
 
+
 		wrapper.linkedData = attr.values[ val ] = values[ val ] = linkedData;
+
 		$tooltip.appendTo( $wrapper );
+
+		$wrapper
+			.on('touchstart', function(){
+				isScrolling = false;
+			})
+			.on('touchmove', function(e){
+				isScrolling = true;
+			})
+			.on('touchend', function(e){
+				if( !isScrolling ) {
+					$input.prop( "checked", true);
+					changeFieldset();
+				}
+			});
 	},
 
 	changeFieldset = function( event ) {
