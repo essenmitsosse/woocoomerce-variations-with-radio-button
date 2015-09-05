@@ -109,12 +109,14 @@ define( function () {
 					nextTreeName = selected[ currentOrder.attrName ].val;
 					// console.log( "static", nextTreeName, 123 );
 				}
+
+				
 			} else {
 				nextTreeName = currentOrder.attrName;
 				// console.log( "always true", nextTreeName, 123 );
 			}
 
-			tree = tree[ nextTreeName ];
+			tree = tree[ nextTreeName ] || tree[ currentOrder.attrName ];
 			if ( !tree ) {
 				return false;
 			}		
