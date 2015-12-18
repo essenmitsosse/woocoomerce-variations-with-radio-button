@@ -71,7 +71,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 	}
 
 	public static function add_scripts() {
-		$suffix = ( defined( "SCRIPT_DEBUG" ) && SCRIPT_DEBUG ) ? "" : ".min";
+		$suffix = ( SCRIPT_DEBUG && current_user_can( 'manage_options' ) ) ? "" : ".min";
 
 		// handles the variation selection of products, is replaced by add-to-cart-variation-with-radio
 		wp_deregister_script( "wc-add-to-cart-variation" );

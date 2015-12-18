@@ -14,6 +14,7 @@ $.fn.betoniuWcVariationForm = function () {
 	$product_img = $imageDiv.find( 'img:eq(0)' ),
 
 	o_src = $product_img.attr( 'src' ),
+	o_srcset = $product_img.attr( 'srcset' ),
 	o_title = $product_img.attr( 'title' ),
 	o_alt = $product_img.attr( 'alt' ),			
 
@@ -201,15 +202,18 @@ $.fn.betoniuWcVariationForm = function () {
 		changeImage = function ( variation ) {
 			var variation_image = variation.image_link,
 				variation_title = variation.image_title,
-				variation_alt = variation.image_alt;
+				variation_alt = variation.image_alt,
+				image_srcset = variation.image_srcset;
 
 			if ( variation_image && variation_image.length > 1 ) {
 				$product_img
+				.attr( 'srcset', image_srcset )
 				.attr( 'src', variation_image )
 				.attr( 'alt', variation_alt )
 				.attr( 'title', variation_title );
 			} else {
 				$product_img
+				.attr( 'srcset', o_srcset )
 				.attr( 'src', o_src )
 				.attr( 'alt', o_alt )
 				.attr( 'title', o_title );
