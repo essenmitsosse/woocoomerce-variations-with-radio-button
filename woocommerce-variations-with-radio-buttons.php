@@ -79,7 +79,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		if ( function_exists( "is_woocommerce" ) ) {
 			if ( is_woocommerce() && is_product() ) {
 				// Add the plugin script
-				wp_enqueue_script( "woocommerce-variations-with-radio-buttons-frontend", plugins_url( "/assets/js/main" . $suffix . ".js", plugin_basename( __FILE__ ) ), array( "jquery", "woocommerce" ), "1.0.0", true );
+				wp_enqueue_script( "woocommerce-variations-with-radio-buttons-frontend", plugins_url( "/assets/js/main" . $suffix . ".js", plugin_basename( __FILE__ ) ), array( "jquery", "woocommerce" ), "1.0.1", true );
 			}
 		}
 	}
@@ -104,10 +104,6 @@ class Woocommerce_Variations_With_Radio_Buttons {
 			if ( class_exists( 'WGM_Template' ) ) {
 				// add no Javascript notice;
 				add_action( "wgm_before_single_price_html", array( "Woocommerce_Variations_With_Radio_Buttons", "show_product_price_is_loading_via_javascript" ), 50 );
-
-				// for variable product move shipping time notice below the price
-				remove_action( "woocommerce_single_product_summary", array( "WGM_Template", "add_template_loop_shop" ), 11 );
-				add_action( "woocommerce_single_variation", array( "WGM_Template", "add_template_loop_shop" ), 16 );
 			}
 		}
 	}
