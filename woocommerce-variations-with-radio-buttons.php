@@ -32,7 +32,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		add_filter( "woocommerce_locate_template", 			array( "Woocommerce_Variations_With_Radio_Buttons", "add_woocommerce_templates" ), 10, 3 );
 		add_filter( "woocommerce_ajax_variation_threshold", array( "Woocommerce_Variations_With_Radio_Buttons", "infinite_wc_ajax_variation_threshold" ), 10, 2 );
 		add_action( "wp_enqueue_scripts", 					array( "Woocommerce_Variations_With_Radio_Buttons", "add_scripts" ), 20 );
-		
+
 		// Shows price, even min and max price are the same (by default price wouldn’t be added to the product variation info)
 		add_filter( "woocommerce_show_variation_price",     array( "Woocommerce_Variations_With_Radio_Buttons", "always_show_price" ), 100 );
 
@@ -56,11 +56,11 @@ class Woocommerce_Variations_With_Radio_Buttons {
 	}
 
 	public static function add_woocommerce_templates( $template, $template_name, $template_path ){
-		
+
 		// Only check if the template is changed by this plugin
 		if ( $template_name == "single-product/add-to-cart/variable.php" ) {
 			$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR . "woocommerce" . DIRECTORY_SEPARATOR;
-		
+
 			// Only load our templates if they are nonexistent in the theme
 			if( file_exists( $path . $template_name ) && ! locate_template( array( WC()->template_path() . $template_name ) ) ) {
 				$template = $path . $template_name;
@@ -94,9 +94,9 @@ class Woocommerce_Variations_With_Radio_Buttons {
 
 	public static function check_hook_order () {
 		global $product;
-		
 
-		if ( $product->product_type == "variable" ) {
+
+		if ( $product->get_type() == "variable" ) {
 			// move add to cart above the price for variable product
 			remove_action( "woocommerce_single_product_summary", "woocommerce_template_single_add_to_cart" , 30 );
 			add_action( "woocommerce_single_product_summary", "woocommerce_template_single_add_to_cart" , 5 );

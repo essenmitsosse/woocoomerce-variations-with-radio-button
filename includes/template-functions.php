@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Output a list of variation attributes for use in the cart forms. 
+ * Output a list of variation attributes for use in the cart forms.
  * used in the plugins template instead of wc_dropdown_variation_attribute_options
  *
  * @param array $args
@@ -46,7 +46,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 		$attributes = $product->get_variation_attributes();
 		$options    = $attributes[ $attribute ];
 	}
-	
+
 	echo '<fieldset id=\'' . esc_attr( $id ) . '\' class=\'' . esc_attr( $class ) . '\' name=\'' . esc_attr( $name ) . '\' data-attribute_name=\'' . esc_attr( $name ) . '\'>';
 	echo '<legend>' . wc_attribute_label( $attribute ) . '</legend>';
 	do_action( "before_variations_with_radio_buttons_list", $args );
@@ -55,7 +55,7 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 	if ( ! empty( $options ) ) {
 		if ( $product && taxonomy_exists( $attribute ) ) {
 			// Get terms if this is a taxonomy - ordered. We need the names too.
-			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
+			$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
@@ -64,28 +64,28 @@ function wc_radio_variation_attribute_options( $args = array() ) {
 						: checked( $first, true, false );
 
 					wc_radio_select_button_for_add_to_cart( array(
-						"value"       => esc_attr( $term->slug ), 
-						"checked"     => $checkedString, 
+						"value"       => esc_attr( $term->slug ),
+						"checked"     => $checkedString,
 						"content"     => $term->name,
 						"name"        => sanitize_title( $attribute ),
 						"description" => $term->description
 					) );
 
 					$first = false;
-				}				
+				}
 			}
 		} else {
 			foreach ( $options as $option ) {
 				// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 				$checkedString = $selectedValue ?
-					sanitize_title( $selectedValue ) === $selectedValue ? 
-						checked( $selectedValue, sanitize_title( $option ), false ) 
+					sanitize_title( $selectedValue ) === $selectedValue ?
+						checked( $selectedValue, sanitize_title( $option ), false )
 						: checked( $selectedValue, $option, false )
 					: checked( $first, true, false );
 
 				wc_radio_select_button_for_add_to_cart( array(
-					"value"       => esc_attr( $option ), 
-					"checked"     => $checkedString, 
+					"value"       => esc_attr( $option ),
+					"checked"     => $checkedString,
 					"content"     => esc_html( $option ),
 					"name"        => sanitize_title( $attribute )
 				) );
@@ -111,7 +111,7 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 	$checked = $args[ "checked" ];
 	$content = $args[ "content" ];
 	$name = $args[ "name" ];
-	$description = array_key_exists( 'description', $args ) ? 
+	$description = array_key_exists( 'description', $args ) ?
 		$args[ "description" ] !== "" ?
 			$args[ "description" ]
 			: false
@@ -120,7 +120,7 @@ function wc_radio_select_button_for_add_to_cart( $args ) {
 	$id = 'product_value_' . $name . '_' . $value;
 
 	echo "\n<div class='product_variable_option'>".
-	"\n\t<input " . 
+	"\n\t<input " .
 		"type='radio' " .
 		"name='attribute_" . $name . "' " .
 		"id='" . $id . "' " .
