@@ -366,6 +366,7 @@ define( [ './add-to-cart-variations-with-radio/get-all-combinations' ], function
 		// remove existing price with range
 		$( '.price' )
 			.first()
+			.parent()
 			.remove();
 
 		// Bind events
