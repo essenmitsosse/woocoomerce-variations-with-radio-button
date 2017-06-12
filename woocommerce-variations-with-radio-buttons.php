@@ -79,7 +79,7 @@ class Woocommerce_Variations_With_Radio_Buttons {
 		if ( function_exists( "is_woocommerce" ) ) {
 			if ( is_woocommerce() && is_product() ) {
 				// Add the plugin script
-				wp_enqueue_script( "woocommerce-variations-with-radio-buttons-frontend", plugins_url( "/assets/js/main" . $suffix . ".js", plugin_basename( __FILE__ ) ), array( "jquery", "woocommerce" ), "1.1.0", true );
+				wp_enqueue_script( "woocommerce-variations-with-radio-buttons-frontend", plugins_url( "/assets/js/main" . $suffix . ".js", plugin_basename( __FILE__ ) ), array( "jquery", "woocommerce" ), "1.1.1", true );
 			}
 		}
 	}

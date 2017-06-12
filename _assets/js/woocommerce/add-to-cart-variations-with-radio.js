@@ -267,12 +267,12 @@ define( [ './add-to-cart-variations-with-radio/get-all-combinations' ], function
 					);
 
 					$weight.html( variation.weight ?
-						variation.weight :
+						variation.weight_html :
 						$weight.attr( 'data-o_weight' )
 					);
 
 					$dimensions.html( variation.dimensions ?
-						variation.dimensions :
+						variation.dimensions_html :
 						$dimensions.attr( 'data-o_dimensions' )
 					);
 
