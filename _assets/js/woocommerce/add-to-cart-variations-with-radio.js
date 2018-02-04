@@ -211,8 +211,6 @@ define( [ './add-to-cart-variations-with-radio/get-all-combinations' ], function
 					variation_alt = image.alt,
 					image_srcset = image.srcset;
 
-				console.log( 123, image );
-
 				if ( variation_image && variation_image.length > 1 ) {
 					$product_img
 						.attr( 'srcset', image_srcset )
